@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import ImageComponent from "./ImageComponent";
 import NextImage from "next/image";
-import { shareAction } from "@/actions";
+// import { shareAction } from "@/actions";
 import ImageEditor from "./ImageEditor";
+import { shareAction } from "@/actions";
 
 const Share = () => {
   const [media, setMedia] = useState<File | null>(null);
@@ -15,6 +15,8 @@ const Share = () => {
     type: "original",
     sensitive: false,
   });
+
+  console.log(media);
 
   const handleMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -34,7 +36,7 @@ const Share = () => {
       <div className="flex-1 flex flex-col gap-4">
         <input type="text" name="desc" placeholder="What is happening?" className="bg-transparent outline-none placeholder:text-textGray text-xl" />
         {/* PREVIEW IMAGE */}
-        {previewURL && (
+        {media?.type.includes("image") && previewURL && (
           <div className="relative rounded-xl overflow-hidden">
             <NextImage
               src={previewURL}
@@ -45,6 +47,23 @@ const Share = () => {
             />
             <div className="absolute top-2 left-2 bg-black bg-opacity-50 text-white py-1 px-4 rounded-full font-bold text-sm cursor-pointer" onClick={() => setIsEditorOpen(true)}>
               Edit
+            </div>
+            <div
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white h-8 w-8 flex items-center justify-center rounded-full cursor-pointer font-bold text-sm"
+              onClick={() => setMedia(null)}
+            >
+              X
+            </div>
+          </div>
+        )}
+        {media?.type.includes("video") && previewURL && (
+          <div className="relative">
+            <video src={previewURL} className="" controls />
+            <div
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white h-8 w-8 flex items-center justify-center rounded-full cursor-pointer font-bold text-sm"
+              onClick={() => setMedia(null)}
+            >
+              X
             </div>
           </div>
         )}
