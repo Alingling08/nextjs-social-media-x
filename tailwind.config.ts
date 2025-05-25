@@ -18,7 +18,7 @@ export default {
         borderGray: "#2f3336",
         inputGray: "#202327",
         iconBlue: "#1d9bf0",
-        iconGreen: "#00bac7c",
+        iconGreen: "#00bac7",
         iconPink: "#f91880",
       },
     },
