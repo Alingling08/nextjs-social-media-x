@@ -13,19 +13,19 @@ interface FileDetailsResponse {
   customMetaData?: { sensitive: boolean };
 }
 
-const Post = async () => {
-  const getFileDetails = async (fileId: string): Promise<FileDetailsResponse> => {
-    return new Promise((resolve, reject) => {
-      imagekit.getFileDetails(fileId, function (error, result) {
-        if (error) console.log(error);
-        else resolve(result as FileDetailsResponse);
-      });
-    });
-  };
+const Post = () => {
+  // const getFileDetails = async (fileId: string): Promise<FileDetailsResponse> => {
+  //   return new Promise((resolve, reject) => {
+  //     imagekit.getFileDetails(fileId, function (error, result) {
+  //       if (error) console.log(error);
+  //       else resolve(result as FileDetailsResponse);
+  //     });
+  //   });
+  // };
 
-  const fileDetails = await getFileDetails("6831b5dc432c4764168dec23");
+  // const fileDetails = await getFileDetails("6831b5dc432c4764168dec23");
 
-  console.log(fileDetails);
+  // console.log(fileDetails);
 
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
@@ -63,8 +63,8 @@ const Post = async () => {
             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
             non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          {/* <ImageComponent src="general/post.jpeg" alt="" w={600} h={600} /> */}
-          {fileDetails && <ImageComponent src={fileDetails.filePath} alt="" w={fileDetails.width} h={fileDetails.height} />}
+          <ImageComponent src="general/post.jpeg" alt="" w={600} h={600} />
+          {/*  {fileDetails && <ImageComponent src={fileDetails.filePath} alt="" w={fileDetails.width} h={fileDetails.height} className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}/>} */}
           <PostInteraction />
         </div>
       </div>

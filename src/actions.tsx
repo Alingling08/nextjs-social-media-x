@@ -16,9 +16,11 @@ export const shareAction = async (formData: FormData, settings: { type: "origina
       file: buffer,
       fileName: file.name,
       folder: "/posts",
-      transformation: {
-        pre: transformation,
-      },
+      ...(file.type.includes("image") && {
+        transformation: {
+          pre: transformation,
+        },
+      }),
       customMetadata: {
         sensitive: settings.sensitive,
       },
@@ -32,6 +34,7 @@ export const shareAction = async (formData: FormData, settings: { type: "origina
         console.log(err);
       } else if (result && result.url) {
         console.log(result);
+
         // console.log(
         //   imagekit.url({
         //     src: result.url,
